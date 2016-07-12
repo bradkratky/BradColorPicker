@@ -15,6 +15,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		A2FE8B531D355DD70067C0AA /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = A2FE8B521D355DD70067C0AA /* screenshot.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		8CFFCE5B7C6D4238C1FA1CF2 /* Pods_BradColorPicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BradColorPicker_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2FE8B521D355DD70067C0AA /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
 		B28E18BD495902CB5BF8F70F /* Pods_BradColorPicker_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BradColorPicker_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E583BF21321156E279E050 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		C771BAB5DF83612A94457F71 /* Pods-BradColorPicker_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BradColorPicker_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BradColorPicker_Tests/Pods-BradColorPicker_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				E2CC587441956AC5F48597F9 /* BradColorPicker.podspec */,
 				0643A00F6469A85D181BCCCD /* README.md */,
 				B8E583BF21321156E279E050 /* LICENSE */,
+				A2FE8B521D355DD70067C0AA /* screenshot.png */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				A2FE8B531D355DD70067C0AA /* screenshot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
