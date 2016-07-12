@@ -66,7 +66,8 @@ func drawAlphaBackground(context:CGContext?, rect:CGRect){
 }
 
 // converts HSV to RGB
-func HSVtoRGB(var h h:CGFloat, s:CGFloat, v:CGFloat) -> (RGB) {
+func HSVtoRGB(h hue:CGFloat, s:CGFloat, v:CGFloat) -> (RGB) {
+    var h = hue;
     
     h *= 360;
     if(h >= 360){

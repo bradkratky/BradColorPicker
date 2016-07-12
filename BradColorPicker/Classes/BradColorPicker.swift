@@ -32,7 +32,7 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
         self.init(nibName: "BradColorPicker", bundle: NSBundle(forClass: BradColorPicker.classForCoder()));
     }
     
-    public convenience init(delegate delegate:BradColorPickerDelegate){
+    public convenience init(delegate:BradColorPickerDelegate){
         self.init();
         self.delegate = delegate;
     }
@@ -84,8 +84,8 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
         }
         
         // can use #selector(colorPicked:) in swift 2.2
-        self.colorPicker.addTarget(self, action:"colorPicked:", forControlEvents: UIControlEvents.ValueChanged);
-        self.hexField.addTarget(self, action: "hexChanged:", forControlEvents: UIControlEvents.EditingChanged);
+        self.colorPicker.addTarget(self, action: #selector(colorPicked), forControlEvents: UIControlEvents.ValueChanged);
+        self.hexField.addTarget(self, action: #selector(hexChanged), forControlEvents: UIControlEvents.EditingChanged);
         self.hexField.delegate = self;
         
         updateHex();

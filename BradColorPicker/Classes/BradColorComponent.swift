@@ -87,11 +87,11 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
         self.init(nibName: "BradColorComponent", bundle: NSBundle(forClass: BradColorComponent.classForCoder()));
     }
     
-    required override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    required override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil);
     }
     
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder);
     }
     
@@ -102,8 +102,8 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
         self.slider.setting = self.setting;
         
         self.textField.delegate = self;
-        self.textField.addTarget(self, action: "textFieldChanged:", forControlEvents: UIControlEvents.EditingDidEnd);
-        self.slider.addTarget(self, action: "sliderChanged:", forControlEvents: UIControlEvents.ValueChanged);
+        self.textField.addTarget(self, action: #selector(textFieldChanged), forControlEvents: UIControlEvents.EditingDidEnd);
+        self.slider.addTarget(self, action: #selector(sliderChanged), forControlEvents: UIControlEvents.ValueChanged);
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,7 +121,8 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
     }
     */
     
-    func colorCGFloatToInt(var value:CGFloat) -> Int{
+    func colorCGFloatToInt(colorValue:CGFloat) -> Int{
+        var value = colorValue;
         // smooth out display for values such as 0.998
         if(value > 0.95){
             value = ceil(value * 100) / 100;
@@ -145,12 +146,12 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func incrementPressed(sender: UIButton) {
-        value++;
+        value += 1;
         setColorValue(value);
     }
     
     @IBAction func decrementPressed(sender: UIButton) {
-        value--;
+        value -= 1;
         setColorValue(value);
     }
     

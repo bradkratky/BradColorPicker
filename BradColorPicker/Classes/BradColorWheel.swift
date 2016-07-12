@@ -94,14 +94,14 @@ class BradColorWheel: UIControl {
         let provider = CGDataProviderCreateWithCFData(NSData(bytes: &pixelData, length: pixelData.count * sizeof(Pixel)));
         
         let cgimage = CGImageCreate(w, h, 8, 32, w * Int(sizeof(Pixel)), colorSpace, CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue), provider, nil, true, .RenderingIntentDefault);
-        var image = UIImage(CGImage: cgimage!);
+        let image = UIImage(CGImage: cgimage!);
 
         // clip image to circle
         let imageRect = CGRectMake(BRAD_MARGIN,BRAD_MARGIN,radius*2, radius*2);
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0);
-        let circleClip = UIBezierPath.init(roundedRect: imageRect, cornerRadius: radius).addClip();
+        UIBezierPath.init(roundedRect: imageRect, cornerRadius: radius).addClip();
         image.drawInRect(imageRect)
-        let clippedImage = UIGraphicsGetImageFromCurrentImageContext();
+        let clippedImage:UIImage! = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
         return clippedImage;
