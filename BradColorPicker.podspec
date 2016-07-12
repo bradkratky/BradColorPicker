@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BradColorPicker'
-  s.version          = '0.1.0'
-  s.summary          = 'An HSV, RGBA, and hex code color picker.'
+  s.version          = '0.1.1'
+  s.summary          = 'A Swift color picker using HSV, RGBA, and hex codes.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?

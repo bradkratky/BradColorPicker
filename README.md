@@ -6,7 +6,7 @@
 
 ## Screenshots
 
-[](/Example/screenshot.png)
+[](https://raw.githubusercontent.com/bradkratky/BradColorPicker/master/Example/screenshot.png)
 
 ## Installation
 
@@ -27,7 +27,7 @@ let picker:BradColorPicker = BradColorPicker(delegate: self); // init with white
 self.presentViewController(picker, animated: true, completion: {});
 ```
 
-Implement the delegate:
+Implement the delegate, BradColorPickerDelegate:
 ```swift
 // MARK: BradColorPickerDelegate
 func bradColorPicked(color: UIColor) {
