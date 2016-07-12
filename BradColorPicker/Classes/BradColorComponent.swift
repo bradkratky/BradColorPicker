@@ -102,7 +102,7 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
         self.slider.setting = self.setting;
         
         self.textField.delegate = self;
-        self.textField.addTarget(self, action: #selector(textFieldChanged), forControlEvents: UIControlEvents.EditingDidEnd);
+        self.textField.addTarget(self, action: #selector(textFieldChanged), forControlEvents: UIControlEvents.EditingChanged);
         self.slider.addTarget(self, action: #selector(sliderChanged), forControlEvents: UIControlEvents.ValueChanged);
     }
 
@@ -123,11 +123,13 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
     
     func colorCGFloatToInt(colorValue:CGFloat) -> Int{
         var value = colorValue;
-        // smooth out display for values such as 0.998
-        if(value > 0.95){
-            value = ceil(value * 100) / 100;
-        }else if(value < 0.05){
-            value = floor(value * 100) / 100;
+        
+        // smooth out display for values very close to 1 and 0
+        // necessary when moving the wheel selection on the outside - s flickers between 99 and 100
+        if(value > (1 - 1.0 / colorRange(setting).max)){
+            value = ceil(value * colorRange(setting).max) / colorRange(setting).max;
+        }else if(value < (1.0 / colorRange(setting).max)){
+            value = floor(value * colorRange(setting).max) / colorRange(setting).max;
         }
         return Int(min(colorRange(setting).max, max(colorRange(setting).min, CGFloat(colorRange(setting).max * value))));
     }
@@ -242,9 +244,11 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
         if let newValue = Int(newString as String) {
             if(newValue < Int(colorRange(setting).min)){
                 textField.text = String(Int(colorRange(setting).min));
+                textFieldChanged(textField);
                 return false;
             }else if(newValue > Int(colorRange(setting).max)){
                 textField.text = String(Int(colorRange(setting).max));
+                textFieldChanged(textField);
                 return false;
             }
             return true;
