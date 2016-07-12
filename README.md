@@ -4,6 +4,10 @@
 [![License](https://img.shields.io/cocoapods/l/BradColorPicker.svg?style=flat)](http://cocoapods.org/pods/BradColorPicker)
 [![Platform](https://img.shields.io/cocoapods/p/BradColorPicker.svg?style=flat)](http://cocoapods.org/pods/BradColorPicker)
 
+## Screenshots
+
+[](/Example/screenshot.png)
+
 ## Installation
 
 BradColorPicker is available through [CocoaPods](http://cocoapods.org). To install

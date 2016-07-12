@@ -22,7 +22,7 @@ BradColorPicker is an HSV/RGBA color picker written in Swift.  It allows selecti
                        DESC
 
   s.homepage         = 'https://github.com/bradkratky/BradColorPicker'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.screenshots     = 'https://raw.githubusercontent.com/bradkratky/BradColorPicker/master/Example/screenshot.png'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Brad Kratky' => 'brad@bradkratky.ca' }
   s.source           = { :git => 'https://github.com/bradkratky/BradColorPicker.git', :tag => s.version.to_s }
