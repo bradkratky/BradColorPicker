@@ -22,7 +22,7 @@ pod "BradColorPicker"
 
 ## Author
 
-brad, kratkyb@gmail.com
+Brad Kratky, brad@bradkratky.ca
 
 ## License
 

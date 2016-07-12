@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'BradColorPicker'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of BradColorPicker.'
+  s.summary          = 'An HSV, RGBA, and hex code color picker.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,23 +18,21 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+BradColorPicker is an HSV/RGBA color picker written in Swift.  It allows selection of a color using an HSV palette, RGB sliders or hex code input. The picker is launched using a view controller and closes once the user finishes selection.
                        DESC
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/BradColorPicker'
+  s.homepage         = 'https://github.com/bradkratky/BradColorPicker'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'brad' => 'kratkyb@gmail.com' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/BradColorPicker.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { 'Brad Kratky' => 'brad@bradkratky.ca' }
+  s.source           = { :git => 'https://github.com/bradkratky/BradColorPicker.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/bradkratky'
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'BradColorPicker/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'BradColorPicker' => ['BradColorPicker/Assets/*.png']
-  # }
+  s.resource_bundles = { 'BradColorPicker' => ['BradColorPicker/Classes/**/*.xib'] }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

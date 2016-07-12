@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BradColorComponent" customModule="BradColorPicker" customModuleProvider="target">
+            <connections>
+                <outlet property="decrement" destination="mrl-U7-Fhv" id="ZYo-4w-8x0"/>
+                <outlet property="increment" destination="Gpj-s8-adX" id="MBU-De-AVG"/>
+                <outlet property="label" destination="roJ-kX-d2r" id="2Di-nx-fHF"/>
+                <outlet property="slider" destination="p0f-Wa-o3j" id="6ZJ-4r-qnE"/>
+                <outlet property="textField" destination="Owh-sM-UPS" id="jX3-Mh-Tpp"/>
+                <outlet property="view" destination="h3z-zl-Ack" id="xTy-Tc-yDf"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="h3z-zl-Ack">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="360" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Owh-sM-UPS">
+                    <rect key="frame" x="32" y="5" width="42" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="1ZM-ue-rFM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="H:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="roJ-kX-d2r">
+                    <rect key="frame" x="10" y="10" width="17" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p0f-Wa-o3j" customClass="BradColorSlider" customModule="BradColorPicker" customModuleProvider="target">
+                    <rect key="frame" x="79" y="5" width="136" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="140" id="QFk-zK-WC7"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="QFk-zK-WC7"/>
+                        </mask>
+                    </variation>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrl-U7-Fhv" customClass="BradColorButton" customModule="BradColorPicker" customModuleProvider="target">
+                    <rect key="frame" x="225" y="5" width="40" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="Elb-gy-9KZ"/>
+                        <constraint firstAttribute="height" constant="30" id="puk-eJ-e8B"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="-">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="decrementPressed:" destination="-1" eventType="touchUpInside" id="aIH-TQ-ZQT"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gpj-s8-adX" customClass="BradColorButton" customModule="BradColorPicker" customModuleProvider="target">
+                    <rect key="frame" x="270" y="5" width="40" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="Wab-BT-n5g"/>
+                        <constraint firstAttribute="height" constant="30" id="vVg-xL-dVi"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="+">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="incrementPressed:" destination="-1" eventType="touchUpInside" id="MmP-Yc-HjZ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Owh-sM-UPS" firstAttribute="leading" secondItem="roJ-kX-d2r" secondAttribute="trailing" constant="5" id="9Zx-0f-Rup"/>
+                <constraint firstItem="mrl-U7-Fhv" firstAttribute="leading" secondItem="p0f-Wa-o3j" secondAttribute="trailing" constant="10" id="AzV-Th-moK"/>
+                <constraint firstItem="Gpj-s8-adX" firstAttribute="centerY" secondItem="h3z-zl-Ack" secondAttribute="centerY" id="FlL-aO-ANo"/>
+                <constraint firstItem="roJ-kX-d2r" firstAttribute="centerY" secondItem="h3z-zl-Ack" secondAttribute="centerY" id="bXu-aZ-O9L"/>
+                <constraint firstItem="Gpj-s8-adX" firstAttribute="leading" secondItem="mrl-U7-Fhv" secondAttribute="trailing" constant="5" id="c95-ug-IaY"/>
+                <constraint firstItem="p0f-Wa-o3j" firstAttribute="centerY" secondItem="h3z-zl-Ack" secondAttribute="centerY" id="cHl-pN-qE9"/>
+                <constraint firstItem="mrl-U7-Fhv" firstAttribute="centerY" secondItem="h3z-zl-Ack" secondAttribute="centerY" id="dxZ-9x-VFH"/>
+                <constraint firstItem="Owh-sM-UPS" firstAttribute="centerY" secondItem="h3z-zl-Ack" secondAttribute="centerY" id="eBU-D2-0uV"/>
+                <constraint firstItem="p0f-Wa-o3j" firstAttribute="leading" secondItem="Owh-sM-UPS" secondAttribute="trailing" constant="5" id="eYv-tt-XBz"/>
+                <constraint firstAttribute="trailing" secondItem="Gpj-s8-adX" secondAttribute="trailing" constant="10" id="jMx-XG-f9q"/>
+                <constraint firstItem="p0f-Wa-o3j" firstAttribute="height" secondItem="h3z-zl-Ack" secondAttribute="height" constant="-10" id="tT7-AY-9J2"/>
+                <constraint firstItem="roJ-kX-d2r" firstAttribute="leading" secondItem="h3z-zl-Ack" secondAttribute="leading" constant="10" id="whB-QE-8o8"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="87" y="311"/>
+        </view>
+    </objects>
+</document>
