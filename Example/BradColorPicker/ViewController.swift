@@ -25,7 +25,9 @@ class ViewController: UIViewController, BradColorPickerDelegate {
     
     @IBAction func btnLaunchPressed(sender: AnyObject) {
         
-        let picker:BradColorPicker = BradColorPicker(delegate: self);
+        let picker:BradColorPicker = BradColorPicker(delegate: self); // init with white
+        //let picker:BradColorPicker = BradColorPicker(delegate: self, r:0.5, g:0, b:0.5, a:1);
+        //let picker:BradColorPicker = BradColorPicker(delegate: self, color: UIColor.greenColor());
         self.presentViewController(picker, animated: true, completion: {});
     }
     

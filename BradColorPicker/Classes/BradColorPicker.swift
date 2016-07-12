@@ -37,6 +37,19 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
         self.delegate = delegate;
     }
     
+    public convenience init(delegate:BradColorPickerDelegate, color:UIColor){
+        var r:CGFloat = 0, g:CGFloat = 0, b:CGFloat = 0, a:CGFloat = 0;
+        color.getRed(&r, green: &g, blue: &b, alpha: &a);
+        self.init(delegate: delegate, r:r, g:g, b:b, a:a);
+    }
+    
+    public convenience init(delegate:BradColorPickerDelegate, r:CGFloat, g:CGFloat, b:CGFloat, a:CGFloat){
+        self.init(delegate: delegate);
+        self.rgb = (r, g, b);
+        self.a = a;
+        self.hsv = RGBtoHSV(rgb, oldHSV: hsv);
+    }
+    
     required override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil);
     }
@@ -89,8 +102,8 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
         self.hexField.delegate = self;
         
         updateHex();
+        updateWheel();
         updateColor();
-        
     }
     
     override public func didReceiveMemoryWarning() {
