@@ -6,7 +6,7 @@
 
 ## Screenshots
 
-[](https://raw.githubusercontent.com/bradkratky/BradColorPicker/master/Example/screenshot.png)
+![](https://raw.githubusercontent.com/bradkratky/BradColorPicker/master/Example/screenshot.png)
 
 ## Installation
 
