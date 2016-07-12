@@ -1,0 +1,6 @@
+framework module Pods_BradColorPicker_Tests {
+  umbrella header "Pods-BradColorPicker_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
