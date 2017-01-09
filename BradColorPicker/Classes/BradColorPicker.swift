@@ -9,10 +9,10 @@
 import UIKit
 
 public protocol BradColorPickerDelegate : class {
-    func bradColorPicked(color:UIColor);
+    func bradColorPicked(_ color:UIColor);
 }
 
-public class BradColorPicker : UIViewController, BradColorComponentDelegate, UITextFieldDelegate {
+open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var displayColor: BradColorDisplay!
     @IBOutlet weak var colorPicker: BradColorWheel!
@@ -20,7 +20,7 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
     
     @IBOutlet var containers: [UIView]!
     
-    public weak var delegate:BradColorPickerDelegate?;
+    open weak var delegate:BradColorPickerDelegate?;
     
     var a:CGFloat = 1;
     var rgb:RGB = RGB(1,1,1);
@@ -29,7 +29,7 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
     var components:[BradColorComponent] = [];
     
     convenience init(){
-        self.init(nibName: "BradColorPicker", bundle: NSBundle(forClass: BradColorPicker.classForCoder()));
+        self.init(nibName: "BradColorPicker", bundle: Bundle(for: BradColorPicker.classForCoder()));
     }
     
     public convenience init(delegate:BradColorPickerDelegate){
@@ -50,7 +50,7 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
         self.hsv = RGBtoHSV(rgb, oldHSV: hsv);
     }
     
-    required override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    required override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil);
     }
     
@@ -58,47 +58,47 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
         super.init(coder: aDecoder);
     }
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
-        for (index, container) in containers.enumerate() {
+        for (index, container) in containers.enumerated() {
             let component = BradColorComponent();
             switch index {
             case 0:
-                component.setting = .RED;
+                component.setting = .red;
                 break;
             case 1:
-                component.setting = .GREEN;
+                component.setting = .green;
                 break;
             case 2:
-                component.setting = .BLUE;
+                component.setting = .blue;
                 break;
             case 3:
-                component.setting = .HUE;
+                component.setting = .hue;
                 break;
             case 4:
-                component.setting = .SATURATION;
+                component.setting = .saturation;
                 break;
             case 5:
-                component.setting = .VALUE;
+                component.setting = .value;
                 break;
             case 6:
-                component.setting = .ALPHA;
+                component.setting = .alpha;
                 break;
             default:
                 continue;
             }
             component.delegate = self;
-            component.view.frame = CGRectMake(0, 0, container.frame.size.width, container.frame.size.height);
+            component.view.frame = CGRect(x: 0, y: 0, width: container.frame.size.width, height: container.frame.size.height);
             self .addChildViewController(component);
             container .addSubview(component.view);
-            component .didMoveToParentViewController(self);
+            component .didMove(toParentViewController: self);
             components.append(component);
         }
         
         // can use #selector(colorPicked:) in swift 2.2
-        self.colorPicker.addTarget(self, action: #selector(colorPicked), forControlEvents: UIControlEvents.ValueChanged);
-        self.hexField.addTarget(self, action: #selector(hexChanged), forControlEvents: UIControlEvents.EditingChanged);
+        self.colorPicker.addTarget(self, action: #selector(colorPicked), for: UIControlEvents.valueChanged);
+        self.hexField.addTarget(self, action: #selector(hexChanged), for: UIControlEvents.editingChanged);
         self.hexField.delegate = self;
         
         updateHex();
@@ -106,7 +106,7 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
         updateColor();
     }
     
-    override public func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -140,16 +140,16 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
     }
     
     
-    @IBAction func donePressed(sender: BradColorButton) {
+    @IBAction func donePressed(_ sender: BradColorButton) {
         self.delegate?.bradColorPicked(self.displayColor.color);
-        self.dismissViewControllerAnimated(true, completion: nil);
+        self.dismiss(animated: true, completion: nil);
     }
 
     // MARK: ControlEvents
     
     // color wheel value changed event
     // - update hex and components
-    func colorPicked(wheel: BradColorWheel) {
+    func colorPicked(_ wheel: BradColorWheel) {
         rgb = wheel.rgb;
         hsv = RGBtoHSV(rgb, oldHSV: hsv);
         
@@ -159,15 +159,15 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
     
     // text field value changed event
     // - update wheel and components
-    func hexChanged(field: UITextField){
+    func hexChanged(_ field: UITextField){
         
         if let hex = UInt64(field.text!, radix:16) {
             
             // separate components of hex int
-            a = ((CGFloat(hex) / 256 / 256 / 256) % 256) / 255;
-            rgb.r = ((CGFloat(hex) / 256 / 256) % 256) / 255;
-            rgb.g = ((CGFloat(hex) / 256) % 256) / 255;
-            rgb.b = (CGFloat(hex) % 256) / 255;
+            a = ((CGFloat(hex) / 256 / 256 / 256).truncatingRemainder(dividingBy: 256)) / 255;
+            rgb.r = ((CGFloat(hex) / 256 / 256).truncatingRemainder(dividingBy: 256)) / 255;
+            rgb.g = ((CGFloat(hex) / 256).truncatingRemainder(dividingBy: 256)) / 255;
+            rgb.b = (CGFloat(hex).truncatingRemainder(dividingBy: 256)) / 255;
             
             hsv = RGBtoHSV(rgb, oldHSV: hsv);
             
@@ -182,9 +182,9 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
     
     // MARK: UITextFieldDelegate
     
-    public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    open func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var newString = textField.text! as NSString;
-        newString = newString.stringByReplacingCharactersInRange(range, withString: string);
+        newString = newString.replacingCharacters(in: range, with: string) as NSString;
         
         // allow zero characters if they want to clear and re-input everything
         if(newString.length == 0){
@@ -207,7 +207,7 @@ public class BradColorPicker : UIViewController, BradColorComponentDelegate, UIT
     
     // color component changed
     // - update other components, wheel and display color
-    func colorComponentChanged(sender: BradColorComponent) {
+    func colorComponentChanged(_ sender: BradColorComponent) {
         self.rgb = sender.rgb;
         self.hsv = sender.hsv;
         self.a = sender.a;

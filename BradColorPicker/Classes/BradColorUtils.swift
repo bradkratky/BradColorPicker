@@ -17,36 +17,36 @@ public typealias RGB = (r: CGFloat, g:CGFloat, b:CGFloat);
 typealias HSV = (h: CGFloat, s:CGFloat, v:CGFloat);
 
 enum BradColorSetting :Character{
-    case RED = "R"
-    case GREEN = "G"
-    case BLUE = "B"
-    case HUE = "H"
-    case SATURATION = "S"
-    case VALUE = "V"
-    case ALPHA = "A"
+    case red = "R"
+    case green = "G"
+    case blue = "B"
+    case hue = "H"
+    case saturation = "S"
+    case value = "V"
+    case alpha = "A"
 }
 
 // max ranges for different color components
-func colorRange(setting:BradColorSetting) -> (min:CGFloat, max:CGFloat){
+func colorRange(_ setting:BradColorSetting) -> (min:CGFloat, max:CGFloat){
     switch setting {
-    case .RED: fallthrough
-    case .GREEN: fallthrough
-    case .BLUE: fallthrough
-    case .ALPHA:
+    case .red: fallthrough
+    case .green: fallthrough
+    case .blue: fallthrough
+    case .alpha:
         return (0, 255);
-    case .HUE:
+    case .hue:
         return (0, 360);
-    case .SATURATION: fallthrough
-    case .VALUE:
+    case .saturation: fallthrough
+    case .value:
         return (0, 100);
     }
 }
 
-func RGBtoUInt8(rgb:RGB) -> (r:UInt8, g:UInt8, b:UInt8){
+func RGBtoUInt8(_ rgb:RGB) -> (r:UInt8, g:UInt8, b:UInt8){
     return (CGFloatToUInt8(rgb.r), CGFloatToUInt8(rgb.g), CGFloatToUInt8(rgb.b));
 }
 
-func CGFloatToUInt8(float:CGFloat) -> UInt8{
+func CGFloatToUInt8(_ float:CGFloat) -> UInt8{
     return UInt8(max(0, min(255, 255 * float)));
 }
 
@@ -54,12 +54,12 @@ func CGFloatToUInt8(float:CGFloat) -> UInt8{
 let ALPHA_TILE:CGFloat = 8;
 
 // draws a checkered background for displaying tranlucent colors
-func drawAlphaBackground(context:CGContext?, rect:CGRect){
-    UIColor.lightGrayColor().colorWithAlphaComponent(0.5).set();
+func drawAlphaBackground(_ context:CGContext?, rect:CGRect){
+    UIColor.lightGray.withAlphaComponent(0.5).set();
     for x in  0...Int(rect.width / ALPHA_TILE) {
         for y in 0...Int(rect.height / ALPHA_TILE) {
             if (x % 2 == 0 && y % 2 == 0) || (x % 2 == 1 && y % 2 == 1){
-                CGContextFillRect(context, CGRectMake(CGFloat(x) * ALPHA_TILE, CGFloat(y) * ALPHA_TILE, ALPHA_TILE, ALPHA_TILE))
+                context?.fill(CGRect(x: CGFloat(x) * ALPHA_TILE, y: CGFloat(y) * ALPHA_TILE, width: ALPHA_TILE, height: ALPHA_TILE))
             }
         }
     }
@@ -129,7 +129,7 @@ func HSVtoRGB(h hue:CGFloat, s:CGFloat, v:CGFloat) -> (RGB) {
 }
 
 // converts RGB to HSV, returning oldHSV if the hue cannot be determined.
-func RGBtoHSV(rgb:RGB, oldHSV:HSV) -> (HSV) {
+func RGBtoHSV(_ rgb:RGB, oldHSV:HSV) -> (HSV) {
     var hsv:HSV;
     var cmin:CGFloat;
     var cmax:CGFloat;
@@ -165,7 +165,7 @@ func RGBtoHSV(rgb:RGB, oldHSV:HSV) -> (HSV) {
     
     hsv.h /= 360;
     
-    if(isnan(hsv.h)){
+    if(hsv.h.isNaN){
         return oldHSV;
     }
     

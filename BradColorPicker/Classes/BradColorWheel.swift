@@ -55,16 +55,16 @@ class BradColorWheel: UIControl {
         palette = paletteImage();
     }
     
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        super.beginTrackingWithTouch(touch, withEvent: event);
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        super.beginTracking(touch, with: event);
         
         self.handleTouch(touch);
         
         return true;
     }
     
-    override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        super.continueTrackingWithTouch(touch, withEvent: event);
+    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        super.continueTracking(touch, with: event);
         
         self.handleTouch(touch);
         
@@ -78,7 +78,7 @@ class BradColorWheel: UIControl {
         let h = Int(rect.height);
         
         let white = Pixel(a: 255, r: 255, g: 255, b: 255);
-        var pixelData = [Pixel](count: (w*h), repeatedValue: white);
+        var pixelData = [Pixel](repeating: white, count: (w*h));
         
         // set pixels to render the hsv palette
         for i in 0..<h {
@@ -91,16 +91,17 @@ class BradColorWheel: UIControl {
         }
         
         let colorSpace = CGColorSpaceCreateDeviceRGB();
-        let provider = CGDataProviderCreateWithCFData(NSData(bytes: &pixelData, length: pixelData.count * sizeof(Pixel)));
+        let bytes = Data.init(buffer: UnsafeBufferPointer(start: &pixelData, count: (pixelData.count * MemoryLayout<Pixel>.size)))
+        let provider = CGDataProvider(data: bytes as CFData)
         
-        let cgimage = CGImageCreate(w, h, 8, 32, w * Int(sizeof(Pixel)), colorSpace, CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue), provider, nil, true, .RenderingIntentDefault);
-        let image = UIImage(CGImage: cgimage!);
+        let cgimage = CGImage(width: w, height: h, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: w * Int(MemoryLayout<Pixel>.size), space: colorSpace, bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue), provider: provider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent);
+        let image = UIImage(cgImage: cgimage!);
 
         // clip image to circle
-        let imageRect = CGRectMake(BRAD_MARGIN,BRAD_MARGIN,radius*2, radius*2);
+        let imageRect = CGRect(x: BRAD_MARGIN,y: BRAD_MARGIN,width: radius*2, height: radius*2);
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0);
         UIBezierPath.init(roundedRect: imageRect, cornerRadius: radius).addClip();
-        image.drawInRect(imageRect)
+        image.draw(in: imageRect)
         let clippedImage:UIImage! = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
@@ -108,8 +109,8 @@ class BradColorWheel: UIControl {
     }
     
     // sets the indicator position and retrieves the selected color
-    func handleTouch(touch: UITouch){
-        pos = touch.locationInView(self);
+    func handleTouch(_ touch: UITouch){
+        pos = touch.location(in: self);
         
         let x = pos.x - self.bounds.width / 2;
         let y = pos.y - self.bounds.height / 2;
@@ -132,24 +133,24 @@ class BradColorWheel: UIControl {
         rgb = self.colorFromXY(pos.x, y: pos.y, v: self.v);
         setNeedsDisplay();
         
-        self.sendActionsForControlEvents(UIControlEvents.ValueChanged);
+        self.sendActions(for: UIControlEvents.valueChanged);
     }
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect);
+    override func draw(_ rect: CGRect) {
+        super.draw(rect);
         
-        palette.drawInRect(rect);
+        palette.draw(in: rect);
         
         let context = UIGraphicsGetCurrentContext();
         // draw indicator position
         UIColor(white: 0.0, alpha: 1.0).set();
-        CGContextStrokeEllipseInRect(context, CGRectMake(pos.x - BRAD_INDICATOR_WIDTH/2, pos.y - BRAD_INDICATOR_WIDTH/2, BRAD_INDICATOR_WIDTH, BRAD_INDICATOR_WIDTH));
+        context?.strokeEllipse(in: CGRect(x: pos.x - BRAD_INDICATOR_WIDTH/2, y: pos.y - BRAD_INDICATOR_WIDTH/2, width: BRAD_INDICATOR_WIDTH, height: BRAD_INDICATOR_WIDTH));
         UIColor(white: 1.0, alpha: 1.0).set();
-        CGContextStrokeEllipseInRect(context, CGRectMake(pos.x - (BRAD_INDICATOR_WIDTH-1)/2, pos.y - (BRAD_INDICATOR_WIDTH-1)/2, (BRAD_INDICATOR_WIDTH-1), (BRAD_INDICATOR_WIDTH-1)));
+        context?.strokeEllipse(in: CGRect(x: pos.x - (BRAD_INDICATOR_WIDTH-1)/2, y: pos.y - (BRAD_INDICATOR_WIDTH-1)/2, width: (BRAD_INDICATOR_WIDTH-1), height: (BRAD_INDICATOR_WIDTH-1)));
     }
     
     // returns a color from an x,y position within the palette
-    func colorFromXY(x:CGFloat, y:CGFloat, v:CGFloat) -> (RGB) {
+    func colorFromXY(_ x:CGFloat, y:CGFloat, v:CGFloat) -> (RGB) {
         
         let width = self.bounds.width;
         let height = self.bounds.height;
@@ -180,7 +181,7 @@ class BradColorWheel: UIControl {
     }
     
     // updates the indicator position to the coordinate of the given color
-    func xyFromColor(hsv:HSV){
+    func xyFromColor(_ hsv:HSV){
         
         let h = Double(hsv.h * 360);
         let s = Double(hsv.s);

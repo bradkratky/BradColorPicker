@@ -23,16 +23,16 @@ class ViewController: UIViewController, BradColorPickerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func btnLaunchPressed(sender: AnyObject) {
+    @IBAction func btnLaunchPressed(_ sender: AnyObject) {
         
         let picker:BradColorPicker = BradColorPicker(delegate: self); // init with white
         //let picker:BradColorPicker = BradColorPicker(delegate: self, r:0.5, g:0, b:0.5, a:1);
         //let picker:BradColorPicker = BradColorPicker(delegate: self, color: UIColor.greenColor());
-        self.presentViewController(picker, animated: true, completion: {});
+        self.present(picker, animated: true, completion: {});
     }
     
     // MARK: BradColorPickerDelegate
-    func bradColorPicked(color: UIColor) {
+    func bradColorPicked(_ color: UIColor) {
         colorDisplay.backgroundColor = color;
     }
 }

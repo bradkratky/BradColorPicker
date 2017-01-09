@@ -34,7 +34,7 @@ class BradColorSlider: UIControl {
         }
     }
     
-    var setting:BradColorSetting = .GREEN;
+    var setting:BradColorSetting = .green;
     
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,59 +42,59 @@ class BradColorSlider: UIControl {
         
         self.layer.cornerRadius = BRAD_CORNER_RADIUS;
         self.clipsToBounds = true;
-        self.contentMode = .Redraw;
+        self.contentMode = .redraw;
     }
     
     func setValue(){
         switch setting {
-        case .RED:
+        case .red:
             value = rgb.r;
             break;
-        case .GREEN:
+        case .green:
             value = rgb.g;
             break;
-        case .BLUE:
+        case .blue:
             value = rgb.b;
             break;
-        case .HUE:
+        case .hue:
             value = hsv.h;
             break;
-        case .SATURATION:
+        case .saturation:
             value = hsv.s;
             break;
-        case .VALUE:
+        case .value:
             value = hsv.v;
             break;
-        case .ALPHA:
+        case .alpha:
             value = a;
             break;
         }
     }
     
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        super.beginTrackingWithTouch(touch, withEvent: event);
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        super.beginTracking(touch, with: event);
         
         self.handleTouch(touch);
         
         return true;
     }
     
-    override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        super.continueTrackingWithTouch(touch, withEvent: event);
+    override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        super.continueTracking(touch, with: event);
         
         self.handleTouch(touch);
         
         return true;
     }
     
-    func handleTouch(touch: UITouch){
-        self.value = touch.locationInView(self).x / self.bounds.width;
+    func handleTouch(_ touch: UITouch){
+        self.value = touch.location(in: self).x / self.bounds.width;
         
-        self.sendActionsForControlEvents(UIControlEvents.ValueChanged);
+        self.sendActions(for: UIControlEvents.valueChanged);
     }
 
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect);
+    override func draw(_ rect: CGRect) {
+        super.draw(rect);
         
         var colors:[CGFloat] = [];
         var colorLocations:[CGFloat] = [0.0, 1.0];
@@ -103,16 +103,16 @@ class BradColorSlider: UIControl {
         
         // updates the background gradient to reflect the current rgb/hsv values
         switch setting {
-        case .RED:
+        case .red:
             colors = [0, rgb.g, rgb.b, 1, 1, rgb.g, rgb.b, 1];
             break;
-        case .GREEN:
+        case .green:
             colors = [rgb.r, 0, rgb.b, 1, rgb.r, 1, rgb.b, 1];
             break;
-        case .BLUE:
+        case .blue:
             colors = [rgb.r, rgb.g, 0, 1, rgb.r, rgb.g, 1, 1];
             break;
-        case .HUE:
+        case .hue:
             colorLocations = [0.0, 0.167, 0.333, 0.5, 0.667, 0.833, 1.0];
             num = 7;
             colors = [  1, 0, 0, 1,
@@ -123,17 +123,17 @@ class BradColorSlider: UIControl {
                 1, 0, 1, 1,
                 1, 0, 0, 1];
             break;
-        case .SATURATION:
+        case .saturation:
             let start:RGB = HSVtoRGB(h: hsv.h, s: 0, v: hsv.v);
             let end:RGB = HSVtoRGB(h: hsv.h, s: 1, v: hsv.v);
             colors = [start.r, start.g, start.b, 1, end.r, end.g, end.b, 1];
             break;
-        case .VALUE:
+        case .value:
             let start:RGB = HSVtoRGB(h: hsv.h, s: hsv.s, v: 0);
             let end:RGB = HSVtoRGB(h: hsv.h, s: hsv.s, v: 1);
             colors = [start.r, start.g, start.b, 1, end.r, end.g, end.b, 1];
             break;
-        case .ALPHA:
+        case .alpha:
             let start:RGB = HSVtoRGB(h: hsv.h, s: 0, v: hsv.v);
             let end:RGB = HSVtoRGB(h: hsv.h, s: 1, v: hsv.v);
             colors = [start.r, start.g, start.b, 0, end.r, end.g, end.b, 1];
@@ -143,22 +143,22 @@ class BradColorSlider: UIControl {
         let context = UIGraphicsGetCurrentContext();
         let colorSpace = CGColorSpaceCreateDeviceRGB();
         
-        let gradient = CGGradientCreateWithColorComponents(colorSpace, colors, colorLocations, num);
+        let gradient = CGGradient(colorSpace: colorSpace, colorComponents: colors, locations: colorLocations, count: num);
         let startPt = CGPoint(x: 0, y: 0);
         let endPt = CGPoint(x: rect.width, y: 0);
         
         // draw checkered background
-        if setting == .ALPHA {
+        if setting == .alpha {
             drawAlphaBackground(context, rect: rect);
         }
         
         // draw gradient
-        CGContextDrawLinearGradient(context, gradient, startPt, endPt, CGGradientDrawingOptions.init(rawValue: 0));
+        context?.drawLinearGradient(gradient!, start: startPt, end: endPt, options: CGGradientDrawingOptions.init(rawValue: 0));
         
         // draw indicator position
         UIColor(white: 0.0, alpha: 1.0).set();
-        CGContextStrokeEllipseInRect(context, CGRectMake(value * rect.width - BRAD_INDICATOR_WIDTH/2, rect.height / 2 - BRAD_INDICATOR_WIDTH/2, BRAD_INDICATOR_WIDTH, BRAD_INDICATOR_WIDTH));
+        context?.strokeEllipse(in: CGRect(x: value * rect.width - BRAD_INDICATOR_WIDTH/2, y: rect.height / 2 - BRAD_INDICATOR_WIDTH/2, width: BRAD_INDICATOR_WIDTH, height: BRAD_INDICATOR_WIDTH));
         UIColor(white: 1.0, alpha: 1.0).set();
-        CGContextStrokeEllipseInRect(context, CGRectMake(value * rect.width - (BRAD_INDICATOR_WIDTH-1)/2, rect.height / 2 - (BRAD_INDICATOR_WIDTH-1)/2, (BRAD_INDICATOR_WIDTH-1), (BRAD_INDICATOR_WIDTH-1)));
+        context?.strokeEllipse(in: CGRect(x: value * rect.width - (BRAD_INDICATOR_WIDTH-1)/2, y: rect.height / 2 - (BRAD_INDICATOR_WIDTH-1)/2, width: (BRAD_INDICATOR_WIDTH-1), height: (BRAD_INDICATOR_WIDTH-1)));
     }
 }

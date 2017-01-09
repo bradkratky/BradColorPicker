@@ -13,7 +13,7 @@ import UIKit
 
 class BradColorDisplay:UIView{
     
-    var color:UIColor = UIColor.whiteColor(){
+    var color:UIColor = UIColor.white{
         didSet{
             setNeedsDisplay();
         }
@@ -32,27 +32,27 @@ class BradColorDisplay:UIView{
         
         self.clipsToBounds = true;
         self.layer.cornerRadius = BRAD_CORNER_RADIUS;
-        self.layer.borderColor = UIColor.lightGrayColor().CGColor;
+        self.layer.borderColor = UIColor.lightGray.cgColor;
         self.layer.borderWidth = 0.5;
     }
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect);
+    override func draw(_ rect: CGRect) {
+        super.draw(rect);
         
         let context = UIGraphicsGetCurrentContext();
         
         // draw position
-        if CGColorGetAlpha(self.color.CGColor) < 1 {
+        if self.color.cgColor.alpha < 1 {
             drawAlphaBackground(context, rect: rect);
         }
         
-        UIColor.whiteColor().set();
-        CGContextStrokeRectWithWidth(context, rect, 2);
+        UIColor.white.set();
+        context?.stroke(rect, width: 2);
         
-        UIColor.blackColor().set();
-        CGContextStrokeRect(context, rect);
+        UIColor.black.set();
+        context?.stroke(rect);
         
         color.set();
-        CGContextFillRect(context, rect);
+        context?.fill(rect);
     }
 }

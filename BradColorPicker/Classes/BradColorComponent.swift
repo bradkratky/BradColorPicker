@@ -12,7 +12,7 @@
 import UIKit
 
 protocol BradColorComponentDelegate : class {
-    func colorComponentChanged(sender: BradColorComponent);
+    func colorComponentChanged(_ sender: BradColorComponent);
 }
 
 class BradColorComponent: UIViewController, UITextFieldDelegate {
@@ -26,28 +26,28 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
 
     
     weak var delegate:BradColorComponentDelegate?;
-    var setting:BradColorSetting = .RED;
+    var setting:BradColorSetting = .red;
     var value:Int = 0;
     var rgb:RGB = RGB(0,0,0) {
         didSet{
             
             switch setting {
-            case .RED:
+            case .red:
                 updateValues(colorCGFloatToInt(rgb.r));
                 break;
-            case .GREEN:
+            case .green:
                 updateValues(colorCGFloatToInt(rgb.g));
                 break;
-            case .BLUE:
+            case .blue:
                 updateValues(colorCGFloatToInt(rgb.b));
                 break;
-            case .HUE:
+            case .hue:
                 break;
-            case .SATURATION:
+            case .saturation:
                 break;
-            case .VALUE:
+            case .value:
                 break;
-            case .ALPHA:
+            case .alpha:
                 break;
             }
         }
@@ -55,39 +55,39 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
     var hsv:HSV = HSV(0,0,0) {
         didSet{
             switch setting {
-            case .RED:
+            case .red:
                 break;
-            case .GREEN:
+            case .green:
                 break;
-            case .BLUE:
+            case .blue:
                 break;
-            case .HUE:
+            case .hue:
                 updateValues(colorCGFloatToInt(hsv.h));
                 break;
-            case .SATURATION:
+            case .saturation:
                 updateValues(colorCGFloatToInt(hsv.s));
                 break;
-            case .VALUE:
+            case .value:
                 updateValues(colorCGFloatToInt(hsv.v));
                 break;
-            case .ALPHA:
+            case .alpha:
                 break;
             }
         }
     };
     var a:CGFloat = 0{
         didSet{
-            if setting == .ALPHA {
+            if setting == .alpha {
                 updateValues(colorCGFloatToInt(a));
             }
         }
     }
     
     convenience init(){
-        self.init(nibName: "BradColorComponent", bundle: NSBundle(forClass: BradColorComponent.classForCoder()));
+        self.init(nibName: "BradColorComponent", bundle: Bundle(for: BradColorComponent.classForCoder()));
     }
     
-    required override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    required override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil);
     }
     
@@ -102,8 +102,8 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
         self.slider.setting = self.setting;
         
         self.textField.delegate = self;
-        self.textField.addTarget(self, action: #selector(textFieldChanged), forControlEvents: UIControlEvents.EditingChanged);
-        self.slider.addTarget(self, action: #selector(sliderChanged), forControlEvents: UIControlEvents.ValueChanged);
+        self.textField.addTarget(self, action: #selector(textFieldChanged), for: UIControlEvents.editingChanged);
+        self.slider.addTarget(self, action: #selector(sliderChanged), for: UIControlEvents.valueChanged);
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,7 +121,7 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
     }
     */
     
-    func colorCGFloatToInt(colorValue:CGFloat) -> Int{
+    func colorCGFloatToInt(_ colorValue:CGFloat) -> Int{
         var value = colorValue;
         
         // smooth out display for values very close to 1 and 0
@@ -134,7 +134,7 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
         return Int(min(colorRange(setting).max, max(colorRange(setting).min, CGFloat(colorRange(setting).max * value))));
     }
 
-    func textFieldChanged(sender:UITextField){
+    func textFieldChanged(_ sender:UITextField){
         
         if let value:Int = Int(sender.text!) {
             setColorValue(Int(min(colorRange(setting).max, max(colorRange(setting).min, CGFloat(value)))));
@@ -143,52 +143,52 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func sliderChanged(sender:BradColorSlider){
+    func sliderChanged(_ sender:BradColorSlider){
         setColorValue(colorCGFloatToInt(sender.value));
     }
     
-    @IBAction func incrementPressed(sender: UIButton) {
+    @IBAction func incrementPressed(_ sender: UIButton) {
         value += 1;
         setColorValue(value);
     }
     
-    @IBAction func decrementPressed(sender: UIButton) {
+    @IBAction func decrementPressed(_ sender: UIButton) {
         value -= 1;
         setColorValue(value);
     }
     
     
     // value set from component (NOT from wheel)
-    func setColorValue(value:Int){
+    func setColorValue(_ value:Int){
         
         let fvalue = CGFloat(value) / colorRange(setting).max;
         
         switch setting {
-        case .RED:
+        case .red:
             rgb.r = fvalue;
             hsv = RGBtoHSV(rgb, oldHSV: hsv);
             break;
-        case .GREEN:
+        case .green:
             rgb.g = fvalue;
             hsv = RGBtoHSV(rgb, oldHSV: hsv);
             break;
-        case .BLUE:
+        case .blue:
             rgb.b = fvalue;
             hsv = RGBtoHSV(rgb, oldHSV: hsv);
             break;
-        case .HUE:
+        case .hue:
             hsv.h = fvalue;
             rgb = HSVtoRGB(h: hsv.h, s: hsv.s, v: hsv.v);
             break;
-        case .SATURATION:
+        case .saturation:
             hsv.s = fvalue;
             rgb = HSVtoRGB(h: hsv.h, s: hsv.s, v: hsv.v);
             break;
-        case .VALUE:
+        case .value:
             hsv.v = fvalue;
             rgb = HSVtoRGB(h: hsv.h, s: hsv.s, v: hsv.v);
             break;
-        case .ALPHA:
+        case .alpha:
             a = fvalue;
             break;
         }
@@ -197,21 +197,21 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
     }
     
     // update subviews with rgb, hsv values
-    func updateValues(value:Int){
+    func updateValues(_ value:Int){
         
         self.value = value;
         
         if(self.value <= Int(colorRange(setting).min)){
             self.value = Int(colorRange(setting).min);
-            decrement.enabled = false;
-            increment.enabled = true;
+            decrement.isEnabled = false;
+            increment.isEnabled = true;
         }else if(value >= Int(colorRange(setting).max)){
             self.value = Int(colorRange(setting).max);
-            increment.enabled = false;
-            decrement.enabled = true;
+            increment.isEnabled = false;
+            decrement.isEnabled = true;
         }else{
-            increment.enabled = true;
-            decrement.enabled = true;
+            increment.isEnabled = true;
+            decrement.isEnabled = true;
         }
         
         let fvalue = CGFloat(self.value) / colorRange(setting).max;
@@ -227,9 +227,9 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
     
     // MARK: UITextFieldDelegate
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var newString = textField.text! as NSString;
-        newString = newString.stringByReplacingCharactersInRange(range, withString: string);
+        newString = newString.replacingCharacters(in: range, with: string) as NSString;
         
         // allow zero characters if they want to clear and re-input everything
         if(newString.length == 0){

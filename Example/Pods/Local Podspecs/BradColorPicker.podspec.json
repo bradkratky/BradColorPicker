@@ -1,9 +1,10 @@
 {
   "name": "BradColorPicker",
   "version": "0.1.0",
-  "summary": "An HSV, RGBA, and hex code color picker.",
+  "summary": "A Swift color picker using HSV, RGBA, and hex codes.",
   "description": "BradColorPicker is an HSV/RGBA color picker written in Swift.  It allows selection of a color using an HSV palette, RGB sliders or hex code input. The picker is launched using a view controller and closes once the user finishes selection.",
   "homepage": "https://github.com/bradkratky/BradColorPicker",
+  "screenshots": "https://raw.githubusercontent.com/bradkratky/BradColorPicker/master/Example/screenshot.png",
   "license": {
     "type": "MIT",
     "file": "LICENSE"

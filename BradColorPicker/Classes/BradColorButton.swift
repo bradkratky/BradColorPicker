@@ -11,12 +11,12 @@ import UIKit
 class BradColorButton: UIButton {
     
     
-    let bkrdNormal:UIColor = UIColor.whiteColor();
+    let bkrdNormal:UIColor = UIColor.white;
     let bkrdSelected:UIColor = UIColor.init(red: 0.9, green: 0.9, blue: 0.9, alpha: 1);
     
-    override var enabled:Bool{
+    override var isEnabled:Bool{
         didSet{
-            if enabled {
+            if isEnabled {
                 backgroundColor = bkrdNormal;
             }else{
                 backgroundColor = bkrdSelected;
@@ -24,10 +24,10 @@ class BradColorButton: UIButton {
         }
     }
     
-    override var highlighted:Bool{
+    override var isHighlighted:Bool{
         didSet{
-            if enabled {
-                if highlighted {
+            if isEnabled {
+                if isHighlighted {
                     backgroundColor = bkrdSelected;
                 }else{
                     backgroundColor = bkrdNormal;
@@ -51,11 +51,11 @@ class BradColorButton: UIButton {
     
     func setup(){
         self.layer.cornerRadius = BRAD_CORNER_RADIUS;
-        self.layer.borderColor = UIColor.lightGrayColor().CGColor;
+        self.layer.borderColor = UIColor.lightGray.cgColor;
         self.layer.borderWidth = 0.5;
         
-        self.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal);
-        self.setTitleColor(bkrdNormal, forState: UIControlState.Highlighted);
+        self.setTitleColor(UIColor.black, for: UIControlState());
+        self.setTitleColor(bkrdNormal, for: UIControlState.highlighted);
 
     }
 
