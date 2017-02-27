@@ -13,13 +13,6 @@
 
 import UIKit
 
-struct Pixel {
-    var a:UInt8;
-    var r:UInt8;
-    var g:UInt8;
-    var b:UInt8;
-}
-
 class BradColorWheel: UIControl {
     
     // palette radius, < self.frame.size.width/2
@@ -77,24 +70,27 @@ class BradColorWheel: UIControl {
         let w = Int(rect.width);
         let h = Int(rect.height);
         
-        let white = Pixel(a: 255, r: 255, g: 255, b: 255);
-        var pixelData = [Pixel](repeating: white, count: (w*h));
+        var pixelData = [UInt8](repeating: 255, count: (4*w*h));
         
         // set pixels to render the hsv palette
         for i in 0..<h {
             for j in 0..<w {
-                let index = j + i * w;
+                let index = 4 * (j + i * w);
                 
                 let rgb:RGB = self.colorFromXY(CGFloat(j), y: CGFloat(i), v: 1);
-                (pixelData[index].r, pixelData[index].g, pixelData[index].b) = RGBtoUInt8(rgb);
+                let (r, g, b) = RGBtoUInt8(rgb)
+                pixelData[index] = r
+                pixelData[index+1] = g
+                pixelData[index+2] = b
+                pixelData[index+3] = 255
             }
         }
         
         let colorSpace = CGColorSpaceCreateDeviceRGB();
-        let bytes = Data.init(buffer: UnsafeBufferPointer(start: &pixelData, count: (pixelData.count * MemoryLayout<Pixel>.size)))
+        let bytes = Data.init(bytes: pixelData)
         let provider = CGDataProvider(data: bytes as CFData)
         
-        let cgimage = CGImage(width: w, height: h, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: w * Int(MemoryLayout<Pixel>.size), space: colorSpace, bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue), provider: provider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent);
+        let cgimage = CGImage(width: w, height: h, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: w * 32, space: colorSpace, bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue), provider: provider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent);
         let image = UIImage(cgImage: cgimage!);
 
         // clip image to circle
