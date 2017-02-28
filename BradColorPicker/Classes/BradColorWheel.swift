@@ -30,7 +30,7 @@ class BradColorWheel: UIControl {
         
         self.setup();
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder);
         
@@ -69,8 +69,8 @@ class BradColorWheel: UIControl {
         
         let w = Int(rect.width);
         let h = Int(rect.height);
-        
         var pixelData = [UInt8](repeating: 255, count: (4*w*h));
+        
         
         // set pixels to render the hsv palette
         for i in 0..<h {
@@ -86,13 +86,15 @@ class BradColorWheel: UIControl {
             }
         }
         
+        let bitmapInfo  = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
         let colorSpace = CGColorSpaceCreateDeviceRGB();
-        let bytes = Data.init(bytes: pixelData)
-        let provider = CGDataProvider(data: bytes as CFData)
-        
-        let cgimage = CGImage(width: w, height: h, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: w * 32, space: colorSpace, bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue), provider: provider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent);
+        let data = Data.init(bytes: pixelData)
+        let nsData = NSData.init(data: data)
+        let mutableData = UnsafeMutableRawPointer.init(mutating: nsData.bytes)
+        let context = CGContext.init(data: mutableData, width: w, height: h, bitsPerComponent: 8, bytesPerRow: w*4, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
+        let cgimage = context?.makeImage()
         let image = UIImage(cgImage: cgimage!);
-
+        
         // clip image to circle
         let imageRect = CGRect(x: BRAD_MARGIN,y: BRAD_MARGIN,width: radius*2, height: radius*2);
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0);
@@ -119,7 +121,7 @@ class BradColorWheel: UIControl {
             }else if x < 0 {
                 theta += CGFloat(M_PI);
             }
-
+            
             pos.x = (self.bounds.width / 2) + radius * cos(theta);
             pos.y = (self.bounds.width / 2) + radius * sin(theta);
             
@@ -189,7 +191,4 @@ class BradColorWheel: UIControl {
         
         setNeedsDisplay();
     }
-   
-    
-    
 }
