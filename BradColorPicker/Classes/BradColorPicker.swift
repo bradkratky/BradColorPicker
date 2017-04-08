@@ -60,6 +60,11 @@ open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITex
     
     override open func viewDidLoad() {
         super.viewDidLoad()
+        self.done.imageView?.contentMode = .scaleAspectFit
+        
+        let tapRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(viewTapped))
+        tapRecognizer.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapRecognizer)
         
         for (index, container) in containers.enumerated() {
             let component = BradColorComponent();
@@ -178,6 +183,10 @@ open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITex
             // not a valid hex code
         }
         
+    }
+    
+    func viewTapped() {
+        self.view.endEditing(true)
     }
     
     // MARK: UITextFieldDelegate
