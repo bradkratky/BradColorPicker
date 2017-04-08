@@ -117,9 +117,9 @@ class BradColorWheel: UIControl {
             var theta = atan(y / x);
             
             if x == 0 {
-                theta = (y > 0) ? CGFloat(M_PI)/2 : 3*CGFloat(M_PI)/2;
+                theta = (y > 0) ? .pi/2 : 3*(.pi)/2;
             }else if x < 0 {
-                theta += CGFloat(M_PI);
+                theta += .pi;
             }
             
             pos.x = (self.bounds.width / 2) + radius * cos(theta);
@@ -156,7 +156,7 @@ class BradColorWheel: UIControl {
         let jj = Double(x) - Double(width) / 2.0;
         let ii = Double(y) - Double(height) / 2.0;
         
-        var hue = atan(ii / jj) * 180 / M_PI;
+        var hue = atan(ii / jj) * 180 / .pi;
         if(x >= width/2){
             hue += 180;
         }else if(y > height/2){
@@ -184,8 +184,8 @@ class BradColorWheel: UIControl {
         let h = Double(hsv.h * 360);
         let s = Double(hsv.s);
         
-        let x = Double(self.bounds.width)/2 + Double(radius) * s * cos(h * M_PI / 180);
-        let y = Double(self.bounds.height)/2 + Double(radius) * s * sin(h * M_PI / 180);
+        let x = Double(self.bounds.width)/2 + Double(radius) * s * cos(h * .pi / 180);
+        let y = Double(self.bounds.height)/2 + Double(radius) * s * sin(h * .pi / 180);
         
         pos = CGPoint.init(x: x, y: y);
         
