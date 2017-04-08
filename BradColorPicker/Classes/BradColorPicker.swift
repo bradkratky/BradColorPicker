@@ -17,6 +17,7 @@ open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITex
     @IBOutlet weak var displayColor: BradColorDisplay!
     @IBOutlet weak var colorPicker: BradColorWheel!
     @IBOutlet weak var hexField: UITextField!
+    @IBOutlet weak var done: BradColorButton!
     
     @IBOutlet var containers: [UIView]!
     
@@ -101,7 +102,6 @@ open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITex
             components.append(component);
         }
         
-        // can use #selector(colorPicked:) in swift 2.2
         self.colorPicker.addTarget(self, action: #selector(colorPicked), for: UIControlEvents.valueChanged);
         self.hexField.addTarget(self, action: #selector(hexChanged), for: UIControlEvents.editingChanged);
         self.hexField.delegate = self;
