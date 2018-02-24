@@ -141,7 +141,7 @@ open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITex
             component.hsv = self.hsv;
             component.a = self.a;
         }
-        self.displayColor.color = UIColor.init(colorLiteralRed: Float(rgb.r), green: Float(rgb.g), blue: Float(rgb.b), alpha: Float(a));
+        self.displayColor.color = UIColor.init(red: rgb.r, green: rgb.g, blue: rgb.b, alpha: a);
     }
     
     
