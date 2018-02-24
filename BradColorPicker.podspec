@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BradColorPicker'
-  s.version          = '0.3.6'
+  s.version          = '0.3.0'
   s.summary          = 'A Swift color picker using HSV, RGBA, and hex codes.'
 
 # This description is used to generate tags and improve search results.
