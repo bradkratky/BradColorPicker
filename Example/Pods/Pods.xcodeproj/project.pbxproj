@@ -22,7 +22,7 @@
 		9389906C884D1AB68E474AE73E7C36DB /* BradColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494EE8436839A4ED1C1DACDD79CA606D /* BradColorPicker.swift */; };
 		9C46EAB9637328DA32D2D0B64352FDA0 /* BradColorComponent.xib in Sources */ = {isa = PBXBuildFile; fileRef = E940967D24399709C8C6B5F99BB45C58 /* BradColorComponent.xib */; };
 		9E3FC629FB79ECAC9B333DE6D8E73F3B /* Pods-BradColorPicker_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BB8378088EC2A87A4F6E4F41A17B8A /* Pods-BradColorPicker_Example-dummy.m */; };
-		A2E9B58F1E987B44004F2CE4 /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = A2E9B58E1E987B44004F2CE4 /* done.png */; };
+		A270665C2041FAED0011D312 /* bcp_assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A270665B2041FAED0011D312 /* bcp_assets.xcassets */; };
 		A3D007806847015DF4971A68E8C54CB1 /* BradColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8550A1A648F5BF3CD6CF33DF03FD31CA /* BradColorUtils.swift */; };
 		AB24EB22B2BC3497E5EE17F3A378A6B4 /* BradColorWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F80DF5E01DE3988ACDA51DC699DA88 /* BradColorWheel.swift */; };
 		D890DA7B764AB68B022F1DB94124DE0D /* BradColorDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = C335D0077EA99CB30CE1693587160015 /* BradColorDisplay.swift */; };
@@ -70,8 +70,8 @@
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F522F9F15A0CC3124FCD5588A45FA42 /* Pods-BradColorPicker_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BradColorPicker_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A1D79F99C37D8EF5E5B8EC5E506D2815 /* Pods-BradColorPicker_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-BradColorPicker_Example.modulemap"; sourceTree = "<group>"; };
+		A270665B2041FAED0011D312 /* bcp_assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = bcp_assets.xcassets; sourceTree = "<group>"; };
 		A2D4C7AAC2019FE4004C3591A0C4F788 /* BradColorPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BradColorPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2E9B58E1E987B44004F2CE4 /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = done.png; path = Assets/done.png; sourceTree = "<group>"; };
 		A6A67EF6A5C3CEC2712157B90B06C0BC /* Pods-BradColorPicker_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BradColorPicker_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		A6CB392658FE458E7B07624A202044D7 /* Pods_BradColorPicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BradColorPicker_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B39C202B53952C4E08C3D3E3C608D309 /* Pods-BradColorPicker_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BradColorPicker_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 		A2E9B58D1E987B37004F2CE4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				A2E9B58E1E987B44004F2CE4 /* done.png */,
+				A270665B2041FAED0011D312 /* bcp_assets.xcassets */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -454,8 +454,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A270665C2041FAED0011D312 /* bcp_assets.xcassets in Resources */,
 				6BA436F5AA4620BEFB9CC5F0B36E9940 /* BradColorPicker.bundle in Resources */,
-				A2E9B58F1E987B44004F2CE4 /* done.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
