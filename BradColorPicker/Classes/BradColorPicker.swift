@@ -154,7 +154,7 @@ open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITex
     
     // color wheel value changed event
     // - update hex and components
-    func colorPicked(_ wheel: BradColorWheel) {
+    @objc func colorPicked(_ wheel: BradColorWheel) {
         rgb = wheel.rgb;
         hsv = RGBtoHSV(rgb, oldHSV: hsv);
         
@@ -164,7 +164,7 @@ open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITex
     
     // text field value changed event
     // - update wheel and components
-    func hexChanged(_ field: UITextField){
+    @objc func hexChanged(_ field: UITextField){
         
         if let hex = UInt64(field.text!, radix:16) {
             
@@ -185,7 +185,7 @@ open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITex
         
     }
     
-    func viewTapped() {
+    @objc func viewTapped() {
         self.view.endEditing(true)
     }
     

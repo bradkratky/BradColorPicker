@@ -134,7 +134,7 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
         return Int(min(colorRange(setting).max, max(colorRange(setting).min, CGFloat(colorRange(setting).max * value))));
     }
 
-    func textFieldChanged(_ sender:UITextField){
+    @objc func textFieldChanged(_ sender:UITextField){
         
         if let value:Int = Int(sender.text!) {
             setColorValue(Int(min(colorRange(setting).max, max(colorRange(setting).min, CGFloat(value)))));
@@ -143,7 +143,7 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func sliderChanged(_ sender:BradColorSlider){
+    @objc func sliderChanged(_ sender:BradColorSlider){
         setColorValue(colorCGFloatToInt(sender.value));
     }
     
