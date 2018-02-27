@@ -12,7 +12,7 @@ public protocol BradColorPickerDelegate : class {
     func bradColorPicked(_ color:UIColor);
 }
 
-open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITextFieldDelegate {
+open class BradColorPicker : UIViewController {
     
     @IBOutlet weak var displayColor: BradColorDisplay!
     @IBOutlet weak var colorPicker: BradColorWheel!
@@ -188,9 +188,24 @@ open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITex
     @objc func viewTapped() {
         self.view.endEditing(true)
     }
-    
-    // MARK: UITextFieldDelegate
-    
+}
+
+// MARK: BradColorComponentDelegate
+extension BradColorPicker : BradColorComponentDelegate {
+    // color component changed
+    // - update other components, wheel and display color
+    func colorComponentChanged(_ sender: BradColorComponent) {
+        self.rgb = sender.rgb;
+        self.hsv = sender.hsv;
+        self.a = sender.a;
+        updateWheel();
+        updateHex();
+        updateColor();
+    }
+}
+
+// MARK: UITextFieldDelegate
+extension BradColorPicker : UITextFieldDelegate {
     open func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var newString = textField.text! as NSString;
         newString = newString.replacingCharacters(in: range, with: string) as NSString;
@@ -212,16 +227,8 @@ open class BradColorPicker : UIViewController, BradColorComponentDelegate, UITex
         }
     }
     
-    // MARK: BradColorComponentDelegate
-    
-    // color component changed
-    // - update other components, wheel and display color
-    func colorComponentChanged(_ sender: BradColorComponent) {
-        self.rgb = sender.rgb;
-        self.hsv = sender.hsv;
-        self.a = sender.a;
-        updateWheel();
-        updateHex();
-        updateColor();
+    open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
