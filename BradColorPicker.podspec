@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BradColorPicker'
-  s.version          = '0.3.0'
+  s.version          = '0.3.1'
   s.summary          = 'A Swift color picker using HSV, RGBA, and hex codes.'
 
 # This description is used to generate tags and improve search results.
@@ -31,5 +31,5 @@ BradColorPicker is an HSV/RGBA color picker written in Swift.  It allows selecti
   s.ios.deployment_target = '8.0'
   s.swift_version = '4.0'
   s.source_files = 'BradColorPicker/Classes/**/*'
-  s.resources = 'BradColorPicker/**/*'
+  s.resources = 'BradColorPicker/**/*.xcassets'
 end
