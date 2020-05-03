@@ -14,7 +14,7 @@ let BRAD_CORNER_RADIUS = CGFloat.init(5);
 let BRAD_INDICATOR_WIDTH = CGFloat.init(6);
 
 public typealias RGB = (r: CGFloat, g:CGFloat, b:CGFloat);
-typealias HSV = (h: CGFloat, s:CGFloat, v:CGFloat);
+public typealias HSV = (h: CGFloat, s:CGFloat, v:CGFloat);
 
 enum BradColorSetting :Character{
     case red = "R"
@@ -66,7 +66,7 @@ func drawAlphaBackground(_ context:CGContext?, rect:CGRect){
 }
 
 // converts HSV to RGB
-func HSVtoRGB(h hue:CGFloat, s:CGFloat, v:CGFloat) -> (RGB) {
+public func HSVtoRGB(h hue:CGFloat, s:CGFloat, v:CGFloat) -> (RGB) {
     var h = hue;
     
     h *= 360;
@@ -129,7 +129,7 @@ func HSVtoRGB(h hue:CGFloat, s:CGFloat, v:CGFloat) -> (RGB) {
 }
 
 // converts RGB to HSV, returning oldHSV if the hue cannot be determined.
-func RGBtoHSV(_ rgb:RGB, oldHSV:HSV) -> (HSV) {
+public func RGBtoHSV(_ rgb:RGB, oldHSV:HSV) -> (HSV) {
     var hsv:HSV;
     var cmin:CGFloat;
     var cmax:CGFloat;

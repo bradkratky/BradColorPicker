@@ -54,8 +54,8 @@ class BradColorButton: UIButton {
         self.layer.borderColor = UIColor.lightGray.cgColor;
         self.layer.borderWidth = 0.5;
         
-        self.setTitleColor(UIColor.black, for: UIControlState());
-        self.setTitleColor(bkrdNormal, for: UIControlState.highlighted);
+        self.setTitleColor(UIColor.black, for: UIControl.State());
+        self.setTitleColor(bkrdNormal, for: UIControl.State.highlighted);
 
     }
 

@@ -102,8 +102,8 @@ class BradColorComponent: UIViewController, UITextFieldDelegate {
         self.slider.setting = self.setting;
         
         self.textField.delegate = self;
-        self.textField.addTarget(self, action: #selector(textFieldChanged), for: UIControlEvents.editingChanged);
-        self.slider.addTarget(self, action: #selector(sliderChanged), for: UIControlEvents.valueChanged);
+        self.textField.addTarget(self, action: #selector(textFieldChanged), for: UIControl.Event.editingChanged);
+        self.slider.addTarget(self, action: #selector(sliderChanged), for: UIControl.Event.valueChanged);
     }
 
     override func didReceiveMemoryWarning() {

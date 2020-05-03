@@ -102,8 +102,8 @@ open class BradColorPicker : UIViewController {
             components.append(component);
         }
         
-        self.colorPicker.addTarget(self, action: #selector(colorPicked), for: UIControlEvents.valueChanged);
-        self.hexField.addTarget(self, action: #selector(hexChanged), for: UIControlEvents.editingChanged);
+        self.colorPicker.addTarget(self, action: #selector(colorPicked), for: UIControl.Event.valueChanged);
+        self.hexField.addTarget(self, action: #selector(hexChanged), for: UIControl.Event.editingChanged);
         self.hexField.delegate = self;
         
         updateHex();

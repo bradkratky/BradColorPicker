@@ -131,7 +131,7 @@ class BradColorWheel: UIControl {
         rgb = self.colorFromXY(pos.x, y: pos.y, v: self.v);
         setNeedsDisplay();
         
-        self.sendActions(for: UIControlEvents.valueChanged);
+        self.sendActions(for: UIControl.Event.valueChanged);
     }
     
     override func draw(_ rect: CGRect) {

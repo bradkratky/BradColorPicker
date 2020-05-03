@@ -90,7 +90,7 @@ class BradColorSlider: UIControl {
     func handleTouch(_ touch: UITouch){
         self.value = touch.location(in: self).x / self.bounds.width;
         
-        self.sendActions(for: UIControlEvents.valueChanged);
+        self.sendActions(for: UIControl.Event.valueChanged);
     }
 
     override func draw(_ rect: CGRect) {
