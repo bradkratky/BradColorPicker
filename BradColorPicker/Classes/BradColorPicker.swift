@@ -96,9 +96,9 @@ open class BradColorPicker : UIViewController {
             }
             component.delegate = self;
             component.view.frame = CGRect(x: 0, y: 0, width: container.frame.size.width, height: container.frame.size.height);
-            self .addChildViewController(component);
+            self .addChild(component);
             container .addSubview(component.view);
-            component .didMove(toParentViewController: self);
+            component .didMove(toParent: self);
             components.append(component);
         }
         
