@@ -88,7 +88,7 @@ class BradColorWheel: UIControl {
         
         let bitmapInfo  = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
         let colorSpace = CGColorSpaceCreateDeviceRGB();
-        let data = Data.init(bytes: pixelData)
+        let data = Data(pixelData)
         let nsData = NSData.init(data: data)
         let mutableData = UnsafeMutableRawPointer.init(mutating: nsData.bytes)
         let context = CGContext.init(data: mutableData, width: w, height: h, bitsPerComponent: 8, bytesPerRow: w*4, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
