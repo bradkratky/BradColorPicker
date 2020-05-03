@@ -21,6 +21,8 @@ pod "BradColorPicker"
 
 Swift 2: v0.1.0
 Swift 3: v0.2.0
+Swift 4: v0.3.x
+Swift 5: v0.5.x
 
 Present the BradColorPicker view controller and set it's delegate.  The initial color can also be set:
 ```swift
